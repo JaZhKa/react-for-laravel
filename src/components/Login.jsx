@@ -6,6 +6,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [errors, setErrors] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -15,7 +16,9 @@ function Login() {
       setPassword("");
       navigate("/");
     } catch (error) {
-      console.log(error);
+      if (error.response.status !== 200) {
+        setErrors('Incorrect data!');
+      }
     }
   };
 
@@ -58,24 +61,22 @@ function Login() {
               type='password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder='******************'
+              placeholder='********'
             />
           </div>
         </div>
-        <div className='md:flex md:items-center mb-6'>
-          <div className='md:w-1/3'></div>
-          <label className='md:w-2/3 block text-gray-500 font-bold'>
-            <input className='mr-2 leading-tight' type='checkbox' />
-            <span className='text-sm'>Send me your newsletter!</span>
-          </label>
-        </div>
+              {errors && (
+                <div className='flex'>
+                  <span className='text-red-400 text-sm m-2 p-2'>{errors}</span>
+                </div>
+              )}
         <div className='md:flex md:items-center'>
           <div className='md:w-1/3'></div>
           <div className='md:w-2/3'>
             <button
               className='shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded'
               type='submit'
-            >
+              >
               Sign Up
             </button>
           </div>

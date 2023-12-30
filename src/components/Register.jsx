@@ -8,6 +8,7 @@ function Register() {
   const [password, setPassword] = useState("");
   const [password_confirmation, setPasswordConfirmation] = useState("");
   const navigate = useNavigate();
+  const [errors, setErrors] = useState([]);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -19,9 +20,11 @@ function Register() {
       setPassword('');
       setPasswordConfirmation('');
       setName('');
-      navigate('/');
+      navigate('/login');
     } catch (error) {
-      console.log(error)
+      if (error.response.status === 422) {
+        setErrors(error.response.data.errors);
+      }
     }
   }
 
@@ -46,6 +49,11 @@ function Register() {
               onChange={(e) => setName(e.target.value)}
               placeholder='John Doe'
             />
+              {errors.name && (
+                <div className='flex'>
+                  <span className='text-red-400 text-sm m-2 p-2'>{errors.name[0]}</span>
+                </div>
+              )}
           </div>
         </div>
         <div className='md:flex md:items-center mb-6'>
@@ -66,6 +74,11 @@ function Register() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder='JohnDoe@mail.com'
             />
+            {errors.email && (
+                <div className='flex'>
+                  <span className='text-red-400 text-sm m-2 p-2'>{errors.email[0]}</span>
+                </div>
+              )}
           </div>
         </div>
         <div className='md:flex md:items-center mb-6'>
@@ -86,6 +99,11 @@ function Register() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            {errors.password && (
+                <div className='flex'>
+                  <span className='text-red-400 text-sm m-2 p-2'>{errors.password[0]}</span>
+                </div>
+              )}
           </div>
         </div>
         <div className='md:flex md:items-center mb-6'>
