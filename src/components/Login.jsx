@@ -1,25 +1,14 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "./../api/axios";
+import useAuthContext from "../context/AuthContext";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-  const [errors, setErrors] = useState("");
+  const { login, errors } = useAuthContext();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    try {
-      await axios.post("/auth/login", { email, password });
-      setEmail("");
-      setPassword("");
-      navigate("/");
-    } catch (error) {
-      if (error.response.status !== 200) {
-        setErrors('Incorrect data!');
-      }
-    }
+    login({ email, password });
   };
 
   return (
@@ -65,18 +54,18 @@ function Login() {
             />
           </div>
         </div>
-              {errors && (
-                <div className='flex'>
-                  <span className='text-red-400 text-sm m-2 p-2'>{errors}</span>
-                </div>
-              )}
+        {errors && (
+          <div className='flex'>
+            <span className='text-red-400 text-sm m-2 p-2'>{errors}</span>
+          </div>
+        )}
         <div className='md:flex md:items-center'>
           <div className='md:w-1/3'></div>
           <div className='md:w-2/3'>
             <button
               className='shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded'
               type='submit'
-              >
+            >
               Sign Up
             </button>
           </div>
