@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useAuthContext from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 function Register() {
   const [name, setName] = useState("");
@@ -127,6 +128,7 @@ function Register() {
               Sign In
             </button>
           </div>
+          <Link to='/login'>Sign Up</Link>
         </div>
       </form>
     </>

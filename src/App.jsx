@@ -1,33 +1,24 @@
 import "./App.css";
-import { Link, Route, Routes } from "react-router-dom";
-import useAuthContext from "./context/AuthContext";
-import Home from "./components/Home";
-import Login from "./components/Login";
-import Register from "./components/Register";
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import AuthLayout from "./layouts/AuthLayout";
+import GuestLayout from "./layouts/GuestLayout";
 
 function App() {
-  const { user, logout } = useAuthContext();
-
   return (
     <div>
-      <nav>
-        <Link to='/'>Home</Link>
-        {user ? (
-          <button onClick={logout}>logout</button>
-        ) : (
-          <div>
-            <Link to='/login'>Login</Link>
-            <Link to='/register'>Register</Link>
-          </div>
-        )}
-      </nav>
-      <div>
-        <Routes>
+      <Routes>
+        <Route element={<AuthLayout />}>
           <Route path='/' element={<Home />} />
+          {/* <Route path="/posts" element={<Posts />} /> */}
+        </Route>
+        <Route element={<GuestLayout />}>
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
-        </Routes>
-      </div>
+        </Route>
+      </Routes>
     </div>
   );
 }

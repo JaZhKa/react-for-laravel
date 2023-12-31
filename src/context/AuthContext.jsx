@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "./../api/axios";
 import { useNavigate } from "react-router-dom";
 
@@ -29,6 +29,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async ({ ...data }) => {
     await csrf();
+    setErrors([]);
     try {
       const response = await axios.post("api/auth/login", data);
       localStorage.setItem("JWT", response.data.access_token);
@@ -43,6 +44,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async ({ ...data }) => {
     await csrf();
+    setErrors([]);
     try {
       await axios.post("api/auth/register", data);
       navigate("/login");
@@ -68,6 +70,12 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
       });
   };
+
+  useEffect(() => {
+    if (!user) {
+      getUser();
+    }
+  }, []);
 
   return (
     <AuthContext.Provider

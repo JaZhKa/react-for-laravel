@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useAuthContext from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -69,6 +70,7 @@ function Login() {
               Sign Up
             </button>
           </div>
+          <Link to='/register'>Sign In</Link>
         </div>
       </form>
     </>
