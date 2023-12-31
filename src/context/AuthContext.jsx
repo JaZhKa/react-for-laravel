@@ -31,8 +31,8 @@ export const AuthProvider = ({ children }) => {
     await csrf();
     try {
       const response = await axios.post("api/auth/login", data);
-      localStorage.setItem('JWT', response.data.access_token);
-      getUser();
+      localStorage.setItem("JWT", response.data.access_token);
+      await getUser();
       navigate("/");
     } catch (error) {
       if (error.response.status !== 200) {
@@ -45,7 +45,6 @@ export const AuthProvider = ({ children }) => {
     await csrf();
     try {
       await axios.post("api/auth/register", data);
-      getUser();
       navigate("/login");
     } catch (error) {
       if (error.response.status === 422) {
@@ -54,8 +53,26 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const logout = async () => {
+    await axios
+      .post(
+        "api/auth/logout",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("JWT")}`,
+          },
+        }
+      )
+      .then(() => {
+        setUser(null);
+      });
+  };
+
   return (
-    <AuthContext.Provider value={{ user, errors, getUser, login, register }}>
+    <AuthContext.Provider
+      value={{ user, errors, getUser, login, register, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );
