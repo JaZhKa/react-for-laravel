@@ -7,21 +7,31 @@ const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [errors, setErrors] = useState("");
-  const [token, setToken] = useState("");
   const navigate = useNavigate();
   const csrf = async () => await axios.get("/sanctum/csrf-cookie");
-  localStorage.setItem("JWT", token);
+
   const getUser = async () => {
-    const { data } = await axios.post("api/auth/me");
-    setUser(data);
+    try {
+      const { data } = await axios.post(
+        "api/auth/me",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("JWT")}`,
+          },
+        }
+      );
+      setUser(data);
+    } catch (error) {
+      console.error("Error fetching user:", error);
+    }
   };
 
   const login = async ({ ...data }) => {
     await csrf();
     try {
-      await axios
-        .post("api/auth/login", data)
-        .then((response) => setToken(response.data.access_token));
+      const response = await axios.post("api/auth/login", data);
+      localStorage.setItem('JWT', response.data.access_token);
       getUser();
       navigate("/");
     } catch (error) {
@@ -36,7 +46,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await axios.post("api/auth/register", data);
       getUser();
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       if (error.response.status === 422) {
         setErrors(error.response.data.errors);

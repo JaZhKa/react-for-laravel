@@ -1,32 +1,17 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "./../api/axios";
+import useAuthContext from "../context/AuthContext";
 
 function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPasswordConfirmation] = useState("");
-  const navigate = useNavigate();
-  const [errors, setErrors] = useState([]);
+  const { register, errors } = useAuthContext();
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    try {
-      await axios.post("api/auth/register", {
-        name, email, password, password_confirmation,
-      });
-      setEmail('');
-      setPassword('');
-      setPasswordConfirmation('');
-      setName('');
-      navigate('/login');
-    } catch (error) {
-      if (error.response.status === 422) {
-        setErrors(error.response.data.errors);
-      }
-    }
-  }
+    register({ name, email, password, password_confirmation });
+  };
 
   return (
     <>
@@ -49,11 +34,13 @@ function Register() {
               onChange={(e) => setName(e.target.value)}
               placeholder='John Doe'
             />
-              {errors.name && (
-                <div className='flex'>
-                  <span className='text-red-400 text-sm m-2 p-2'>{errors.name[0]}</span>
-                </div>
-              )}
+            {errors.name && (
+              <div className='flex'>
+                <span className='text-red-400 text-sm m-2 p-2'>
+                  {errors.name[0]}
+                </span>
+              </div>
+            )}
           </div>
         </div>
         <div className='md:flex md:items-center mb-6'>
@@ -75,10 +62,12 @@ function Register() {
               placeholder='JohnDoe@mail.com'
             />
             {errors.email && (
-                <div className='flex'>
-                  <span className='text-red-400 text-sm m-2 p-2'>{errors.email[0]}</span>
-                </div>
-              )}
+              <div className='flex'>
+                <span className='text-red-400 text-sm m-2 p-2'>
+                  {errors.email[0]}
+                </span>
+              </div>
+            )}
           </div>
         </div>
         <div className='md:flex md:items-center mb-6'>
@@ -100,10 +89,12 @@ function Register() {
               onChange={(e) => setPassword(e.target.value)}
             />
             {errors.password && (
-                <div className='flex'>
-                  <span className='text-red-400 text-sm m-2 p-2'>{errors.password[0]}</span>
-                </div>
-              )}
+              <div className='flex'>
+                <span className='text-red-400 text-sm m-2 p-2'>
+                  {errors.password[0]}
+                </span>
+              </div>
+            )}
           </div>
         </div>
         <div className='md:flex md:items-center mb-6'>
