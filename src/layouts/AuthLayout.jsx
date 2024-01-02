@@ -8,6 +8,7 @@ const AuthLayout = () => {
     <>
       <nav>
         <Link to='/'>Home</Link>
+        <Link to='/posts'>Posts</Link>
         {user ? (
           <button onClick={logout}>logout</button>
         ) : (
