@@ -1,6 +1,7 @@
 import PostComponent from "../components/PostComponent";
 import { useState, useEffect } from "react";
 import axios from "../api/axios";
+import { Link } from "react-router-dom";
 
 function Posts() {
   const [posts, setPosts] = useState([]);
@@ -23,6 +24,7 @@ function Posts() {
 
   return (
     <>
+    <Link to='/new_post'>Add new post</Link>
       <ul>
         {isLoaded &&
           posts.data.map((post) => <PostComponent key={post.id} post={post} />)}

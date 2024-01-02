@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import AuthLayout from "./layouts/AuthLayout";
 import GuestLayout from "./layouts/GuestLayout";
 import Posts from "./pages/Posts";
+import NewPost from "./pages/NewPost";
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
       <Routes>
         <Route element={<AuthLayout />}>
           <Route path='/' element={<Home />} />
-          <Route path="/posts" element={<Posts />} />
+          <Route path='/posts' element={<Posts />} />
+          <Route path='/new_post' element={<NewPost />} />
         </Route>
         <Route element={<GuestLayout />}>
           <Route path='/login' element={<Login />} />
