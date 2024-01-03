@@ -24,8 +24,8 @@ function Posts() {
 
   return (
     <>
-    <Link to='/new_post'>Add new post</Link>
-      <ul>
+    <Link to='/new_post' className='absolute top-6 -left-28 shadow bg-gray-700 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded'F>Add post</Link>
+      <ul className='mb-8 flex flex-col space-y-10'>
         {isLoaded &&
           posts.data.map((post) => <PostComponent key={post.id} post={post} />)}
       </ul>

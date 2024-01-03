@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "../api/axios";
+import { useNavigate } from "react-router-dom";
 
 function NewPost() {
   const [title, setTitle] = useState("");
@@ -11,6 +12,7 @@ function NewPost() {
   const [allTags, setAllTags] = useState([]);
   const [tags, setTag] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const navigate = useNavigate();
 
   const getCategoriesAndTags = async () => {
     await axios
@@ -21,8 +23,8 @@ function NewPost() {
       })
       .then((res) => setCreateData(res.data));
     if (createData) {
-      await setCategories(createData.categories);
-      await setAllTags(createData.tags);
+      setCategories(createData.categories);
+      setAllTags(createData.tags);
       setIsLoaded(true);
     }
   };
@@ -43,17 +45,20 @@ function NewPost() {
         Authorization: `Bearer ${localStorage.getItem("JWT")}`,
       },
     });
+    navigate('/posts')
   };
 
   useEffect(() => {
     getCategoriesAndTags();
-  }, []);
+  }, [createData]);
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="space-y-8">
         <div className='mb-3'>
-          <label>Title</label>
+          <label className='block text-gray-500 font-bold text-start mb-1 pr-4'>
+            Title
+          </label>
           <input
             name='title'
             type='text'
@@ -61,10 +66,13 @@ function NewPost() {
             placeholder='Title'
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
           />
         </div>
         <div className='mb-3'>
-          <label>Content</label>
+          <label className='block text-gray-500 font-bold text-start mb-1 pr-4'>
+            Content
+          </label>
           <textarea
             name='content'
             id='content'
@@ -72,10 +80,13 @@ function NewPost() {
             placeholder='Content'
             onChange={(e) => setContent(e.target.value)}
             value={content}
+            className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
           ></textarea>
         </div>
         <div className='mb-3'>
-          <label>Image</label>
+          <label className='block text-gray-500 font-bold text-start mb-1 pr-4'>
+            Image
+          </label>
           <input
             name='image'
             type='img'
@@ -83,15 +94,17 @@ function NewPost() {
             placeholder='image.jpeg'
             value={image}
             onChange={(e) => setImage(e.target.value)}
+            className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
           />
         </div>
         <div>
-          <label>Category</label>
+          <label className='block text-gray-500 font-bold text-start mb-1 pr-4'>
+            Category
+          </label>
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            defaultValue={1}
-            className='block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline'
+            className='bg-gray-200 appearance-auto border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 outline'
           >
             {isLoaded &&
               categories.map((category) => (
@@ -102,7 +115,9 @@ function NewPost() {
           </select>
         </div>
         <div>
-          <label>Tags</label>
+          <label className='block text-gray-500 font-bold text-start mb-1 pr-4'>
+            Tags
+          </label>
           <select
             multiple={true}
             onChange={(e) => {
@@ -110,7 +125,7 @@ function NewPost() {
               const value = options.map((option) => option.value);
               setTag(value);
             }}
-            className='block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline'
+            className='bg-gray-200 appearance-auto border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 outline'
           >
             {isLoaded &&
               allTags.map((tag) => (
@@ -120,9 +135,9 @@ function NewPost() {
               ))}
           </select>
         </div>
-        <div className='md:w-2/3'>
+        <div className="flex justify-start">
           <button
-            className='shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded'
+             className='shadow bg-gray-700 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded'
             type='submit'
           >
             Add

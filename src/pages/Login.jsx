@@ -13,7 +13,7 @@ function Login() {
   };
 
   return (
-    <>
+    <div>
       <form className='w-full max-w-sm' onSubmit={handleLogin}>
         <div className='md:flex md:items-center mb-6'>
           <div className='md:w-1/3'>
@@ -26,7 +26,7 @@ function Login() {
           </div>
           <div className='md:w-2/3'>
             <input
-              className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'
+              className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
               id='inline-email-name'
               type='email'
               value={email}
@@ -46,7 +46,7 @@ function Login() {
           </div>
           <div className='md:w-2/3'>
             <input
-              className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'
+              className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
               id='inline-password'
               type='password'
               value={password}
@@ -60,20 +60,24 @@ function Login() {
             <span className='text-red-400 text-sm m-2 p-2'>{errors}</span>
           </div>
         )}
-        <div className='md:flex md:items-center'>
-          <div className='md:w-1/3'></div>
-          <div className='md:w-2/3'>
+        <div className='flex items-baseline justify-around'>
+          <div className='md:w-2/3 mb-4'>
             <button
-              className='shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded'
+              className='shadow bg-gray-700 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded'
               type='submit'
             >
               Sign Up
             </button>
           </div>
-          <Link to='/register'>Sign In</Link>
+          <Link
+            to='/register'
+            className='inline-box border-b-4 border-solid border-transparent font-sans text-lg font-semibold tracking-wider text-gray-700 no-underline hover:border-gray-900 hover:text-gray-900'
+          >
+            Sign In
+          </Link>
         </div>
       </form>
-    </>
+    </div>
   );
 }
 

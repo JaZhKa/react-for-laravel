@@ -10,7 +10,7 @@ import NewPost from "./pages/NewPost";
 
 function App() {
   return (
-    <div>
+    <div className="flex min-h-screen flex-col justify-center items-center">
       <Routes>
         <Route element={<AuthLayout />}>
           <Route path='/' element={<Home />} />
