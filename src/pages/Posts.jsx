@@ -24,17 +24,36 @@ function Posts() {
 
   return (
     <>
-    <Link to='/new_post' className='absolute top-6 -left-28 shadow bg-gray-700 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded'F>Add post</Link>
+      <Link
+        to='/new_post'
+        className='absolute top-6 -left-28 shadow bg-gray-700 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded'
+      >
+        Add post
+      </Link>
       <ul className='mb-8 flex flex-col space-y-10'>
         {isLoaded &&
           posts.data.map((post) => <PostComponent key={post.id} post={post} />)}
       </ul>
-      {isLoaded &&
-        posts.meta.links.map((link) => (
-          <button key={link.label} onClick={() => getPosts(link.label)}>
-            {link.active ? <strong>{link.label}</strong> : link.label}
-          </button>
-        ))}
+      <div className='flex justify-center space-x-4'>
+        {isLoaded &&
+          posts.meta.links.map((link) =>
+            link.label === "&laquo; Previous" ||
+            link.label === "Next &raquo;" ? (
+              ""
+            ) : (
+              <button
+                key={link.label}
+                onClick={() => getPosts(link.label)}
+                className={
+                  "inline-block bg-gray-200 hover:bg-gray-300 focus:bg-gray-300 px-2 rounded-full font-semibold " +
+                  (link.active ? "bg-gray-300" : "")
+                }
+              >
+                {link.active ? <strong>{link.label}</strong> : link.label}
+              </button>
+            )
+          )}
+      </div>
     </>
   );
 }

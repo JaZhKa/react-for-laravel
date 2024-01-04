@@ -66,14 +66,14 @@ function Login() {
               className='shadow bg-gray-700 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded'
               type='submit'
             >
-              Sign Up
+              Sign In
             </button>
           </div>
           <Link
             to='/register'
             className='inline-box border-b-4 border-solid border-transparent font-sans text-lg font-semibold tracking-wider text-gray-700 no-underline hover:border-gray-900 hover:text-gray-900'
           >
-            Sign In
+            Sign Up
           </Link>
         </div>
       </form>
