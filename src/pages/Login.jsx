@@ -14,64 +14,64 @@ function Login() {
 
   return (
     <div>
-      <form className='w-full max-w-sm' onSubmit={handleLogin}>
-        <div className='md:flex md:items-center mb-6'>
-          <div className='md:w-1/3'>
+      <form className="w-full max-w-sm" onSubmit={handleLogin}>
+        <div className="mb-6 md:flex md:items-center">
+          <div className="md:w-1/3">
             <label
-              className='block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4'
-              htmlFor='inline-email-name'
+              className="mb-1 block pr-4 font-bold text-gray-500 md:mb-0 md:text-right"
+              htmlFor="inline-email-name"
             >
               Email
             </label>
           </div>
-          <div className='md:w-2/3'>
+          <div className="md:w-2/3">
             <input
-              className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
-              id='inline-email-name'
-              type='email'
+              className="w-full appearance-none rounded border-2 border-gray-200 bg-gray-200 px-4 py-2 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
+              id="inline-email-name"
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder='Email'
+              placeholder="Email"
             />
           </div>
         </div>
-        <div className='md:flex md:items-center mb-6'>
-          <div className='md:w-1/3'>
+        <div className="mb-6 md:flex md:items-center">
+          <div className="md:w-1/3">
             <label
-              className='block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4'
-              htmlFor='inline-password'
+              className="mb-1 block pr-4 font-bold text-gray-500 md:mb-0 md:text-right"
+              htmlFor="inline-password"
             >
               Password
             </label>
           </div>
-          <div className='md:w-2/3'>
+          <div className="md:w-2/3">
             <input
-              className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
-              id='inline-password'
-              type='password'
+              className="w-full appearance-none rounded border-2 border-gray-200 bg-gray-200 px-4 py-2 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
+              id="inline-password"
+              type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder='********'
+              placeholder="********"
             />
           </div>
         </div>
         {errors && (
-          <div className='flex'>
-            <span className='text-red-400 text-sm m-2 p-2'>{errors}</span>
+          <div className="flex">
+            <span className="m-2 p-2 text-sm text-red-400">{errors}</span>
           </div>
         )}
-        <div className='flex items-baseline justify-around'>
-          <div className='md:w-2/3 mb-4'>
+        <div className="flex items-baseline justify-around">
+          <div className="mb-4 md:w-2/3">
             <button
-              className='shadow bg-gray-700 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded'
-              type='submit'
+              className="focus:shadow-outline rounded bg-gray-700 px-4 py-2 font-bold text-white shadow hover:bg-gray-400 focus:outline-none"
+              type="submit"
             >
-              Sign In
+              Log In
             </button>
           </div>
           <Link
-            to='/register'
-            className='inline-box border-b-4 border-solid border-transparent font-sans text-lg font-semibold tracking-wider text-gray-700 no-underline hover:border-gray-900 hover:text-gray-900'
+            to="/register"
+            className="inline-box border-b-4 border-solid border-transparent font-sans text-lg font-semibold tracking-wider text-gray-700 no-underline hover:border-gray-900 hover:text-gray-900"
           >
             Sign Up
           </Link>

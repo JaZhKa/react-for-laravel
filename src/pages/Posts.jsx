@@ -36,13 +36,13 @@ function Posts() {
       </ul>
       <div className='flex justify-center space-x-4'>
         {isLoaded &&
-          posts.meta.links.map((link) =>
+          posts.meta.links.map((link, i) =>
             link.label === "&laquo; Previous" ||
             link.label === "Next &raquo;" ? (
               ""
             ) : (
               <button
-                key={link.label}
+                key={i}
                 onClick={() => getPosts(link.label)}
                 className={
                   "inline-block bg-gray-200 hover:bg-gray-300 focus:bg-gray-300 px-2 rounded-full font-semibold " +
