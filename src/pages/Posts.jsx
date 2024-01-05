@@ -18,6 +18,19 @@ function Posts() {
     setIsLoaded(true);
   };
 
+  const deletePost = async (postId) => {
+    await axios
+      .delete(
+        `api/posts/${postId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("JWT")}`,
+          },
+        },
+      )
+      .then(console.log('post deleted'));
+  };
+
   useEffect(() => {
     getPosts(1);
   }, []);
@@ -25,16 +38,22 @@ function Posts() {
   return (
     <>
       <Link
-        to='/new_post'
-        className='absolute top-6 -left-28 shadow bg-gray-700 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded'
+        to="/new_post"
+        className="focus:shadow-outline absolute -left-28 top-6 rounded bg-gray-700 px-4 py-2 font-bold text-white shadow hover:bg-gray-400 focus:outline-none"
       >
         Add post
       </Link>
-      <ul className='mb-8 flex flex-col space-y-10'>
+      <ul className="mb-8 flex flex-col space-y-10">
         {isLoaded &&
-          posts.data.map((post) => <PostComponent key={post.id} post={post} />)}
+          posts.data.map((post) => (
+            <PostComponent
+              key={post.id}
+              post={post}
+              deletePost={deletePost}
+            />
+          ))}
       </ul>
-      <div className='flex justify-center space-x-4'>
+      <div className="flex justify-center space-x-4">
         {isLoaded &&
           posts.meta.links.map((link, i) =>
             link.label === "&laquo; Previous" ||
@@ -45,13 +64,13 @@ function Posts() {
                 key={i}
                 onClick={() => getPosts(link.label)}
                 className={
-                  "inline-block bg-gray-200 hover:bg-gray-300 focus:bg-gray-300 px-2 rounded-full font-semibold " +
+                  "inline-block rounded-full bg-gray-200 px-2 font-semibold hover:bg-gray-300 focus:bg-gray-300 " +
                   (link.active ? "bg-gray-300" : "")
                 }
               >
                 {link.active ? <strong>{link.label}</strong> : link.label}
               </button>
-            )
+            ),
           )}
       </div>
     </>
