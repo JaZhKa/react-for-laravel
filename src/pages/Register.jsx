@@ -140,7 +140,7 @@ function Register() {
             to="/login"
             className="inline-box border-b-4 border-solid border-transparent font-sans text-lg font-semibold tracking-wider text-gray-700 no-underline hover:border-gray-900 hover:text-gray-900"
           >
-            Sign In
+            Log In
           </Link>
         </div>
       </form>
