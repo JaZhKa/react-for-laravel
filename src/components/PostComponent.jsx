@@ -17,6 +17,8 @@ function PostComponent(props) {
           <p className="my-3 text-base tracking-wide text-gray-800">
             {props.post.content}
           </p>
+          {props.post.user_id.id === user.id && <button onClick={() => console.log('edit')} className="text-gray-300 absolute top-0 right-10 mr-1 text-xs hover:underline focus:underline">Edit</button>}
+          {props.post.user_id.id === user.id && <button onClick={() => props.deletePost(props.post.id)} className="text-red-300 absolute top-0 right-0 mr-1 text-xs hover:underline focus:underline">Delete</button>}
         </div>
         <div className="cursor-pointer text-sm text-gray-800">
           ❤️ {props.post.likes ? props.post.likes : 0}
@@ -34,7 +36,6 @@ function PostComponent(props) {
         <dir className="mr-2 text-right text-sm font-light italic tracking-tight text-gray-400">
           By {props.post.user_id.name}
         </dir>
-        {props.post.user_id.id === user.id && <button onClick={() => props.deletePost(props.post.id)}>Delete</button>}
       </div>
     </li>
   );

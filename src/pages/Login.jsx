@@ -14,7 +14,7 @@ function Login() {
 
   return (
     <div>
-      <form className="w-full max-w-sm" onSubmit={handleLogin}>
+      <form className="relative w-full max-w-sm" onSubmit={handleLogin}>
         <div className="mb-6 md:flex md:items-center">
           <div className="md:w-1/3">
             <label
@@ -56,9 +56,7 @@ function Login() {
           </div>
         </div>
         {errors && (
-          <div className="flex">
-            <span className="m-2 p-2 text-sm text-red-400">{errors}</span>
-          </div>
+          <span className="absolute -bottom-2 align-center text-xs text-red-400">{errors}</span>
         )}
         <div className="flex items-baseline justify-around">
           <div className="mb-4 md:w-2/3">
