@@ -1,7 +1,23 @@
-function PostFormComponent(props) {
+function PostFormComponent({
+  handleSubmit,
+  title,
+  setTitle,
+  setContent,
+  content,
+  image,
+  setImage,
+  category,
+  setCategory,
+  isLoaded,
+  categories,
+  setTag,
+  allTags,
+  post,
+  children,
+}) {
   return (
     <div>
-      <form onSubmit={props.handleSubmit} className="space-y-8">
+      <form onSubmit={handleSubmit} className="space-y-8">
         <div className="mb-3">
           <label className="mb-1 block pr-4 text-start font-bold text-gray-500">
             Title
@@ -11,8 +27,8 @@ function PostFormComponent(props) {
             type="text"
             id="title"
             placeholder="Title"
-            value={props.title}
-            onChange={(e) => props.setTitle(e.target.value)}
+            value={post ? post.data.data.title : title}
+            onChange={(e) => setTitle(e.target.value)}
             className="w-full appearance-none rounded border-2 border-gray-200 bg-gray-200 px-4 py-2 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
           />
         </div>
@@ -25,8 +41,8 @@ function PostFormComponent(props) {
             id="content"
             rows="3"
             placeholder="Content"
-            onChange={(e) => props.setContent(e.target.value)}
-            value={props.content}
+            onChange={(e) => setContent(e.target.value)}
+            value={post ? post.data.data.content : content}
             className="w-full appearance-none rounded border-2 border-gray-200 bg-gray-200 px-4 py-2 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
           ></textarea>
         </div>
@@ -39,8 +55,8 @@ function PostFormComponent(props) {
             type="img"
             id="image"
             placeholder="image.jpeg"
-            value={props.image}
-            onChange={(e) => props.setImage(e.target.value)}
+            value={post ? post.data.data.image : image}
+            onChange={(e) => setImage(e.target.value)}
             className="w-full appearance-none rounded border-2 border-gray-200 bg-gray-200 px-4 py-2 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
           />
         </div>
@@ -49,12 +65,12 @@ function PostFormComponent(props) {
             Category
           </label>
           <select
-            value={props.category}
-            onChange={(e) => props.setCategory(e.target.value)}
+             value={post ? post.data.data.category : category}
+            onChange={(e) => setCategory(e.target.value)}
             className="w-full appearance-auto rounded border-2 border-gray-200 bg-gray-200 px-4 py-2 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
           >
-            {props.isLoaded &&
-              props.categories.map((category) => (
+            {isLoaded &&
+              categories.map((category) => (
                 <option value={category.id} key={category.id}>
                   {category.title}
                 </option>
@@ -70,12 +86,12 @@ function PostFormComponent(props) {
             onChange={(e) => {
               const options = [...e.target.selectedOptions];
               const value = options.map((option) => option.value);
-              props.setTag(value);
+              setTag(value);
             }}
             className="w-full appearance-auto rounded border-2 border-gray-200 bg-gray-200 px-4 py-2 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
           >
-            {props.isLoaded &&
-              props.allTags.map((tag) => (
+            {isLoaded &&
+              allTags.map((tag) => (
                 <option value={tag.id} key={tag.id}>
                   {tag.title}
                 </option>
@@ -87,11 +103,11 @@ function PostFormComponent(props) {
             className="focus:shadow-outline rounded bg-gray-700 px-4 py-2 font-bold text-white shadow hover:bg-gray-400 focus:outline-none"
             type="submit"
           >
-            Add
+            {children}
           </button>
         </div>
       </form>
     </div>
-  )
+  );
 }
-export default PostFormComponent
+export default PostFormComponent;

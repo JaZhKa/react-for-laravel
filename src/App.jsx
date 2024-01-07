@@ -7,6 +7,7 @@ import AuthLayout from "./layouts/AuthLayout";
 import GuestLayout from "./layouts/GuestLayout";
 import Posts from "./pages/Posts";
 import NewPost from "./pages/NewPost";
+import EditPost from "./pages/EditPost";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/posts' element={<Posts />} />
           <Route path='/new_post' element={<NewPost />} />
+          <Route path='/edit_post' element={<EditPost />} />
         </Route>
         <Route element={<GuestLayout />}>
           <Route path='/login' element={<Login />} />

@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import usePostContext from "./../context/PostContext";
 import PostFormComponent from "../components/PostFormComponent";
+import usePostContext from "../context/PostContext";
 
-function NewPost() {
+function EditPost() {
   const {
     getCategoriesAndTags,
     createData,
@@ -15,6 +15,7 @@ function NewPost() {
     allTags,
     isLoaded,
     handleSubmit,
+    post,
   } = usePostContext();
 
   useEffect(() => {
@@ -24,6 +25,7 @@ function NewPost() {
   return (
     <div>
       <PostFormComponent
+        post={post}
         setTitle={setTitle}
         setContent={setContent}
         setImage={setImage}
@@ -34,10 +36,9 @@ function NewPost() {
         isLoaded={isLoaded}
         handleSubmit={handleSubmit}
       >
-        <span>Add</span>
+        <span>Edit</span>
       </PostFormComponent>
     </div>
   );
 }
-
-export default NewPost;
+export default EditPost;
