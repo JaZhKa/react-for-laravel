@@ -66,9 +66,9 @@ export const PostProvider = ({ children }) => {
     e.preventDefault();
     const id = post.data.data.id;
     const data = {
-      title,
-      content,
-      image,
+      title: title ? title : post?.data.data.title,
+      content: content ? content : post?.data.data.content,
+      image: image ? image : post?.data.data.image,
       category: { id: parseInt(category) },
       tags: tags.map((tag) => ({
         id: parseInt(tag),

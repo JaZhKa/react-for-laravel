@@ -5,6 +5,7 @@ import PostFormComponent from "../components/PostFormComponent";
 function NewPost() {
   const {
     getCategoriesAndTags,
+    createData,
     setTitle,
     setContent,
     setImage,
@@ -18,7 +19,7 @@ function NewPost() {
 
   useEffect(() => {
     getCategoriesAndTags();
-  }, [isLoaded]);
+  }, [createData]);
 
   return (
     <div>
