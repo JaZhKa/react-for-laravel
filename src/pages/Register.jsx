@@ -130,7 +130,7 @@ function Register() {
         <div className="flex items-baseline justify-around">
           <div className="mb-4 md:w-2/3">
             <button
-              className="focus:shadow-outline rounded bg-gray-700 px-4 py-2 font-bold text-white shadow hover:bg-gray-400 focus:outline-none"
+              className="focus:shadow-outline rounded bg-gray-700 px-4 py-2 font-bold text-white shadow hover:bg-gray-400 focus:outline-none active:scale-90"
               type="submit"
             >
               Sign Up

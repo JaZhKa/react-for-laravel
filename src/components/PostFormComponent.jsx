@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function PostFormComponent({
   handleSubmit,
   title,
@@ -27,7 +29,8 @@ function PostFormComponent({
             type="text"
             id="title"
             placeholder="Title"
-            value={post ? post.data.data.title : title}
+            value={title}
+            defaultValue={post && post.data.data.title}
             onChange={(e) => setTitle(e.target.value)}
             className="w-full appearance-none rounded border-2 border-gray-200 bg-gray-200 px-4 py-2 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
           />
@@ -41,8 +44,9 @@ function PostFormComponent({
             id="content"
             rows="3"
             placeholder="Content"
+            value={content}
+            defaultValue={post && post.data.data.content}
             onChange={(e) => setContent(e.target.value)}
-            value={post ? post.data.data.content : content}
             className="w-full appearance-none rounded border-2 border-gray-200 bg-gray-200 px-4 py-2 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
           ></textarea>
         </div>
@@ -55,17 +59,20 @@ function PostFormComponent({
             type="img"
             id="image"
             placeholder="image.jpeg"
-            value={post ? post.data.data.image : image}
+            value={image}
+            defaultValue={post && post.data.data.image}
             onChange={(e) => setImage(e.target.value)}
             className="w-full appearance-none rounded border-2 border-gray-200 bg-gray-200 px-4 py-2 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
           />
         </div>
+        {image && <img className="w-full" src={image} alt="Image" />}
         <div>
           <label className="mb-1 block pr-4 text-start font-bold text-gray-500">
             Category
           </label>
           <select
-             value={post ? post.data.data.category : category}
+            value={category}
+            defaultValue={post && post.data.data.category}
             onChange={(e) => setCategory(e.target.value)}
             className="w-full appearance-auto rounded border-2 border-gray-200 bg-gray-200 px-4 py-2 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
           >
@@ -98,13 +105,19 @@ function PostFormComponent({
               ))}
           </select>
         </div>
-        <div className="flex justify-start">
+        <div className="flex items-baseline justify-start space-x-8">
           <button
-            className="focus:shadow-outline rounded bg-gray-700 px-4 py-2 font-bold text-white shadow hover:bg-gray-400 focus:outline-none"
+            className="focus:shadow-outline rounded bg-gray-700 px-4 py-2 font-bold text-white shadow hover:bg-gray-400 focus:outline-none active:scale-90"
             type="submit"
           >
             {children}
           </button>
+          <Link
+            to="/posts"
+            className="inline-box text-md border-b-4 border-solid border-transparent font-sans font-semibold tracking-wider text-gray-700 no-underline hover:border-gray-900 hover:text-gray-900"
+          >
+            Cancel
+          </Link>
         </div>
       </form>
     </div>

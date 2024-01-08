@@ -46,7 +46,7 @@ function Posts() {
     <>
       <Link
         to="/new_post"
-        className="focus:shadow-outline absolute -left-28 top-0 rounded bg-gray-700 px-4 py-2 font-bold text-white shadow hover:bg-gray-400 focus:outline-none"
+        className="focus:shadow-outline absolute -left-28 top-0 rounded bg-gray-700 px-4 py-2 font-bold text-white shadow hover:bg-gray-400 focus:outline-none active:scale-90"
       >
         Add post
       </Link>

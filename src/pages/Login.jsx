@@ -56,9 +56,11 @@ function Login() {
           </div>
         </div>
         {errors && (
-          <span className="absolute -bottom-2 align-center text-xs text-red-400">{errors}</span>
+          <span className="align-center absolute -bottom-2 text-xs text-red-400">
+            {errors}
+          </span>
         )}
-        <div className="flex items-baseline justify-around">
+        <div className="flex items-baseline justify-around active:scale-90">
           <div className="mb-4 md:w-2/3">
             <button
               className="focus:shadow-outline rounded bg-gray-700 px-4 py-2 font-bold text-white shadow hover:bg-gray-400 focus:outline-none"

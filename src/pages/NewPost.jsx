@@ -14,7 +14,7 @@ function NewPost() {
     categories,
     allTags,
     isLoaded,
-    handleSubmit,
+    handleSubmitNewPost,
   } = usePostContext();
 
   useEffect(() => {
@@ -32,7 +32,7 @@ function NewPost() {
         categories={categories}
         allTags={allTags}
         isLoaded={isLoaded}
-        handleSubmit={handleSubmit}
+        handleSubmit={handleSubmitNewPost}
       >
         <span>Add</span>
       </PostFormComponent>

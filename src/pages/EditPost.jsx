@@ -14,7 +14,7 @@ function EditPost() {
     categories,
     allTags,
     isLoaded,
-    handleSubmit,
+    handleSubmitEditPost,
     post,
   } = usePostContext();
 
@@ -34,7 +34,7 @@ function EditPost() {
         categories={categories}
         allTags={allTags}
         isLoaded={isLoaded}
-        handleSubmit={handleSubmit}
+        handleSubmit={handleSubmitEditPost}
       >
         <span>Edit</span>
       </PostFormComponent>

@@ -38,7 +38,7 @@ export const PostProvider = ({ children }) => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmitNewPost = async (e) => {
     e.preventDefault();
     const data = {
       title,
@@ -52,6 +52,31 @@ export const PostProvider = ({ children }) => {
     };
     try {
       await axios.post("api/posts", data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("JWT")}`,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+    navigate("/posts");
+  };
+
+  const handleSubmitEditPost = async (e) => {
+    e.preventDefault();
+    const id = post.data.data.id;
+    const data = {
+      title,
+      content,
+      image,
+      category: { id: parseInt(category) },
+      tags: tags.map((tag) => ({
+        id: parseInt(tag),
+      })),
+      user_id: user.id,
+    };
+    try {
+      await axios.patch(`api/posts/${id}`, data, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("JWT")}`,
         },
@@ -100,7 +125,8 @@ export const PostProvider = ({ children }) => {
         isLoaded,
         setIsLoaded,
         getCategoriesAndTags,
-        handleSubmit,
+        handleSubmitNewPost,
+        handleSubmitEditPost,
         post,
         getPost,
       }}

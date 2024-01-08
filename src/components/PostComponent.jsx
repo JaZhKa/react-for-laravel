@@ -1,9 +1,11 @@
+import { useState } from "react";
 import useAuthContext from "../context/AuthContext";
 import usePostContext from "../context/PostContext";
 
 function PostComponent(props) {
   const { user } = useAuthContext();
   const { getPost } = usePostContext();
+  const [likes, setLikes] = useState(props.post.likes);
 
   return (
     <li>
@@ -36,8 +38,11 @@ function PostComponent(props) {
             </button>
           )}
         </div>
-        <div className="cursor-pointer text-sm text-gray-800">
-          ❤️ {props.post.likes ? props.post.likes : 0}
+        <div
+          className="cursor-pointer text-sm text-gray-800"
+          onClick={() => setLikes(likes + 1)}
+        >
+          ❤️ {likes}
         </div>
         <ul className="px-6 pb-2 pt-4">
           {props.post.tags.map((tag) => (
