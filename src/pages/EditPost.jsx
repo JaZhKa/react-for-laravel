@@ -5,7 +5,6 @@ import usePostContext from "../context/PostContext";
 function EditPost() {
   const {
     getCategoriesAndTags,
-    createData,
     setTitle,
     setContent,
     setImage,
@@ -20,7 +19,7 @@ function EditPost() {
 
   useEffect(() => {
     getCategoriesAndTags();
-  }, [createData]);
+  }, [isLoaded]);
 
   return (
     <div>
